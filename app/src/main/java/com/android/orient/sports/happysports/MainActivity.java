@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logMessage(CharSequence message) {
-        infoBuilder.append(DateFormat.format("yyyy-MM-dd HH:mm:ss", System.currentTimeMillis()) + "  ").append(message);
+        infoBuilder.append(DateFormat.format("yyyy-MM-dd HH:mm:ss", System.currentTimeMillis()) + "  ").append(message).append("\n");
         mInfo.setText(infoBuilder);
     }
 
