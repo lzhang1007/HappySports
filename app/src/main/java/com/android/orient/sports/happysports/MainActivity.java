@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             loginContainer.setVisibility(View.GONE);
             logout.setVisibility(View.VISIBLE);
 
+            mSteps.setText(CacheUtil.getAppShared().getString("last_steps", ""));
             String account = CacheUtil.getAccount();
             mVersion.setText(getAppShared().getString("app_version", ""));
             mEmailView.setText(account);
@@ -219,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(step)) {
             step = "0";
         }
+        CacheUtil.putAppShared("last_steps", step);
         StringBuilder stepsBuf = new StringBuilder();
         stepsBuf.append("[");
         stepsBuf.append("{\"sportDate\":\"" + DateUtil.getCurrentDateStr() + "\",");
