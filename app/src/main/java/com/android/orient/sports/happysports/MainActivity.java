@@ -2,6 +2,7 @@ package com.android.orient.sports.happysports;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupViewData() {
         String token = CacheUtil.getToken();
         if (TextUtils.isEmpty(token)) {
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             mPasswordView.setText(getAppShared().getString("password", ""));
             String lastTime = CacheUtil.getAppShared().getString("token_date", "" + System.currentTimeMillis());
             mTextMessage.setText("当前登录的账号为：" + "\n" + account
-                    + "\n" + "最后登录日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", Long.parseLong(lastTime))
+                    + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", Long.parseLong(lastTime))
                     + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"));
         }
     }
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                         CacheUtil.setIsLoginHome(true);
                         CacheUtil.putAppShared("password", password);
                         CacheUtil.putAppShared("app_version", version);
-                        CacheUtil.putAppShared("token_date", "" + System.currentTimeMillis());
+//                        CacheUtil.putAppShared("token_date", "" + System.currentTimeMillis());
                         StepCacheUtil.setStride((float) resp.getStride());
                         StepCacheUtil.setBraceletMac(resp.getHandMac());
                         CacheUtil.setLoginNum(resp.getLoginNum());
@@ -203,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     resultCode = jSONObject.getString("result");
                     if (HttpConstant.SUCCESS.equals(resultCode)) {
+                        CacheUtil.putAppShared("token_date", "" + System.currentTimeMillis());
                         logMessage("同步数据成功" + "\n" + jSONObject);
                     } else {
                         logMessage("同步数据失败" + "\n" + jSONObject);
