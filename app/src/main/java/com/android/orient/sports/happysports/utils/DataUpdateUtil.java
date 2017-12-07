@@ -58,9 +58,13 @@ public final class DataUpdateUtil {
         }, callBack);
     }
 
-    public static void sendStepService(final ServiceCallBack callBack) {
+    public static void sendStepService() {
         Random random = new Random(4);
         int step = random.nextInt(10000) + 10000;
+        sendStepService(step, null);
+    }
+
+    public static void sendStepService(int step, final ServiceCallBack callBack) {
         if (step > 45000) {
             return;
         }

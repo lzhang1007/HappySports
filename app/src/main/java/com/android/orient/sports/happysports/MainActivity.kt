@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(my_steps.text)) {
                 return@setOnClickListener
             }
-            DataUpdateUtil.sendStepService(object : ServiceCallBack {
+            DataUpdateUtil.sendStepService(my_steps.text.toString().toInt(), object : ServiceCallBack {
                 override fun onStart() {
                     showProgress(true)
                 }
@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                     + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"))
         }
 
+        my_info.text = CacheUtil.getAppShared().getString("token_Update_time", "")
     }
 
     /**
