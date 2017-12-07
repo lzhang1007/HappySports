@@ -12,7 +12,7 @@ import android.text.format.DateFormat
 import android.view.View
 import com.android.orient.practice.kldf.base.ServiceCallBack
 import com.android.orient.practice.kldf.kldf.util.CacheUtil
-import com.android.orient.sports.happysports.activity.AlermSettingActivity
+import com.android.orient.sports.happysports.activity.AlarmSettingActivity
 import com.android.orient.sports.happysports.activity.LoginActivity
 import com.android.orient.sports.happysports.utils.DataUpdateUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        service.setOnClickListener { startActivity(Intent(this@MainActivity, AlermSettingActivity::class.java)) }
+        service.setOnClickListener { startActivity(Intent(this@MainActivity, AlarmSettingActivity::class.java)) }
         login.setOnClickListener { startActivityForResult(Intent(this@MainActivity, LoginActivity::class.java), KEY_REQUEST_CODE) }
         my_update.setOnClickListener {
             if (TextUtils.isEmpty(my_steps.text)) {
