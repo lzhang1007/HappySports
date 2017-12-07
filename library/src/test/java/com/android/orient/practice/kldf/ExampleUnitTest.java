@@ -1,8 +1,8 @@
-package com.android.orient.sports.happysports;
+package com.android.orient.practice.kldf;
 
 import org.junit.Test;
 
-import java.util.Random;
+import static org.junit.Assert.*;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -11,9 +11,7 @@ import java.util.Random;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect()  {
-        Random random = new Random(4);
-        int v = random.nextInt();
-        System.out.println(v);
+    public void addition_isCorrect() throws Exception {
+        assertEquals(4, 2 + 2);
     }
 }
