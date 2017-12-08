@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -47,8 +48,10 @@ public class AlarmService extends Service {
                 int minute = intent.getIntExtra(KEY_MINUTE, 0);
                 alarm.cancelAlarm(this);
                 alarm.setAlarm(this, calculateTime(hour, minute));
+                Toast.makeText(this, "定时器已经开启", Toast.LENGTH_SHORT).show();
             } else {
                 alarm.cancelAlarm(this);
+                Toast.makeText(this, "定时器已经关闭", Toast.LENGTH_SHORT).show();
             }
         }
     }

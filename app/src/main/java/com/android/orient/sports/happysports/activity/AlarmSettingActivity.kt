@@ -3,6 +3,7 @@ package com.android.orient.sports.happysports.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.android.orient.practice.kldf.kldf.util.CacheUtil
 import com.android.orient.sports.happysports.R
 import com.android.orient.sports.happysports.alarm.AlarmService
 import com.android.orient.sports.happysports.alarm.AlarmService.*
@@ -14,11 +15,15 @@ class AlarmSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm_setting)
         timePicker.setIs24HourView(true)
+        timePicker.currentHour = CacheUtil.getAppShared().getInt("SET_HOURS", 0)
+        timePicker.currentMinute = CacheUtil.getAppShared().getInt("SET_MINUTES", 0)
         timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
             selectTime.text = "您选择的同步时间为每天的$hourOfDay:$minute"
         }
         btnAlarm.setOnClickListener {
             val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
+            CacheUtil.putAppShared("SET_HOURS", timePicker.currentHour)
+            CacheUtil.putAppShared("SET_MINUTES", timePicker.currentMinute)
             intent.putExtra(KEY_HOUR, timePicker.currentHour)
             intent.putExtra(KEY_MINUTE, timePicker.currentMinute)
             intent.putExtra(KEY_ACTION, 0)
