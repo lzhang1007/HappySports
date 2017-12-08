@@ -20,20 +20,22 @@ class AlarmSettingActivity : AppCompatActivity() {
         timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
             selectTime.text = "您选择的同步时间为每天的$hourOfDay:$minute"
         }
-        btnAlarm.setOnClickListener {
-            val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
-            CacheUtil.putAppShared("SET_HOURS", timePicker.currentHour)
-            CacheUtil.putAppShared("SET_MINUTES", timePicker.currentMinute)
-            intent.putExtra(KEY_HOUR, timePicker.currentHour)
-            intent.putExtra(KEY_MINUTE, timePicker.currentMinute)
-            intent.putExtra(KEY_ACTION, 0)
-            startService(intent)
-        }
-
-        btnCancelAlarm.setOnClickListener {
-            val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
-            intent.putExtra(KEY_ACTION, 1)
-            startService(intent)
+        switchBtn.isChecked = CacheUtil.getAppShared().getBoolean("TimePickerState", false)
+        switchBtn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
+                CacheUtil.putAppShared("SET_HOURS", timePicker.currentHour)
+                CacheUtil.putAppShared("SET_MINUTES", timePicker.currentMinute)
+                intent.putExtra(KEY_HOUR, timePicker.currentHour)
+                intent.putExtra(KEY_MINUTE, timePicker.currentMinute)
+                intent.putExtra(KEY_ACTION, 0)
+                startService(intent)
+            } else {
+                val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
+                intent.putExtra(KEY_ACTION, 1)
+                startService(intent)
+            }
+            CacheUtil.putAppShared("TimePickerState", isChecked)
         }
         selectTime.text = "您选择的同步时间为每天的${timePicker.currentHour}:${timePicker.currentMinute}"
     }

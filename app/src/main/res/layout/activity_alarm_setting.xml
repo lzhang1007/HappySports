@@ -33,26 +33,16 @@
             android:textColor="#099fde"
             android:textSize="18sp"/>
 
-        <LinearLayout
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/switchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnCancelAlarm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="关闭定时器"/>
-
-            <Button
-                android:id="@+id/btnAlarm"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="开启定时器"/>
-        </LinearLayout>
-
+            android:background="#e2e1e1"
+            android:checked="false"
+            android:padding="15dp"
+            android:text="定时同步开关"
+            android:textColor="#099fde"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 </ScrollView>

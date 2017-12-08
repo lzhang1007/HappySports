@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onSuccess(jSONObject: JSONObject) {
+                    setupViewData()
                     logMessage("同步数据成功" + "\n" + jSONObject)
                 }
 
