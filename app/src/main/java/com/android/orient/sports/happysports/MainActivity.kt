@@ -76,10 +76,11 @@ class MainActivity : AppCompatActivity() {
         if (TextUtils.isEmpty(token))
             my_message.text = "未登录, 请先登录"
         else {
+            val lastSteps = CacheUtil.getAppShared().getInt("last_steps", 0)
             val account = CacheUtil.getAccount()
             val lastTime = CacheUtil.getAppShared().getString("token_date", "" + System.currentTimeMillis())
             my_message.text = ("当前登录的账号为：" + "\n" + account
-                    + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", java.lang.Long.parseLong(lastTime))
+                    + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", java.lang.Long.parseLong(lastTime)) + ", 步数为:$lastSteps"
                     + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"))
         }
 

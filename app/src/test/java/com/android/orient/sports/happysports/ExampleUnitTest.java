@@ -12,8 +12,8 @@ import java.util.Random;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect()  {
-        Random random = new Random(4);
-        int v = random.nextInt();
-        System.out.println(v);
+        Random random = new Random();
+        int step = random.nextInt(10000) + 10000;
+        System.out.println(step);
     }
 }

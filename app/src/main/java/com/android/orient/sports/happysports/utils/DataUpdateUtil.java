@@ -59,7 +59,7 @@ public final class DataUpdateUtil {
     }
 
     public static void sendStepService(ServiceCallBack callBack) {
-        Random random = new Random(4);
+        Random random = new Random();
         int step = random.nextInt(10000) + 10000;
         sendStepService(step, callBack);
     }
