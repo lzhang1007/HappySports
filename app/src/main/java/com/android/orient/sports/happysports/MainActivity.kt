@@ -20,7 +20,7 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        val KEY_REQUEST_CODE = 1000
+        const val KEY_REQUEST_CODE = 1000
     }
 
     private val infoBuilder = StringBuilder()
@@ -45,11 +45,11 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onSuccess(jSONObject: JSONObject) {
                     setupViewData()
-                    logMessage("同步数据成功" + "\n" + jSONObject)
+                    logMessage("同步数据成功\n$jSONObject")
                 }
 
                 override fun onFailed(message: String) {
-                    logMessage("同步数据失败" + "\n" + message)
+                    logMessage("同步数据失败\n$message")
                 }
             })
         }

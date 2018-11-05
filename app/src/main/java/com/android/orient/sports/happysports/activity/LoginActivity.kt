@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailed(message: String) {
-                    my_message.text = ("登录失败" + "\n" + message)
+                    my_message.text = ("登录失败\n$message")
                 }
             })
         }
@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun setupViewData() {
         val account = CacheUtil.getAccount()
-        my_version.setText(getAppShared().getString("app_version", ""))
+        my_version.setText(getAppShared().getString("app_version", "1.42"))
         my_email.setText(account)
         my_password.setText(getAppShared().getString("password", ""))
         val lastTime = CacheUtil.getAppShared().getString("token_date", "0")

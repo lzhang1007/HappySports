@@ -31,9 +31,9 @@ import java.util.Locale;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
- * Created by zhanglei on 2017/12/7.
+ * @author zhanglei
+ * @date 2017/12/7
  */
-
 public class AlarmReceiver extends BroadcastReceiver {
     private static final long ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -44,15 +44,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (pm != null) {
-            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "");
+            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Time:Tag");
             if (wl != null) {
                 wl.acquire();
                 wl.release();
             }
         }
-//        String value = CacheUtil.getAppShared().getString("token_Update_time", "");
-//        value += "\n" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINESE).format(new Date());
-//        CacheUtil.putAppShared("token_Update_time", value);
         Log.d("AlarmReceiver", "OnReceive");
 
         sendService(context);
@@ -64,7 +61,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent i = new Intent(context, AlarmReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
         if (am != null) {
-            am.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, ONE_DAY, pi); // Millisec * Second * Minute
+            // Millisec * Second * Minute
+            am.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, ONE_DAY, pi);
         }
     }
 
@@ -78,7 +76,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void sendService(final Context context) {
-        DataUpdateUtil.sendStepService(new SimpleServiceCallBack() {
+        DataUpdateUtil.loginAndSyncStep(new SimpleServiceCallBack() {
 
             @Override
             public void onSuccess(JSONObject jSONObject) {

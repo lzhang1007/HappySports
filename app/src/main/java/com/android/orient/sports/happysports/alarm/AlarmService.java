@@ -9,9 +9,9 @@ import android.widget.Toast;
 import java.util.Date;
 
 /**
- * Created by zhanglei on 2017/12/7.
+ * @author zhanglei
+ * @date 2017/12/7
  */
-
 public class AlarmService extends Service {
     public static final String KEY_ACTION = "KEY_ACTION";
     public static final String KEY_HOUR = "KEY_HOUR";
@@ -19,6 +19,7 @@ public class AlarmService extends Service {
 
     AlarmReceiver alarm = new AlarmReceiver();
 
+    @Override
     public void onCreate() {
         super.onCreate();
     }

@@ -21,12 +21,15 @@ import java.util.Random;
 import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by zhanglei on 2017/12/7.
- */
+import static com.android.orient.practice.kldf.kldf.util.CacheUtil.getAppShared;
 
+/**
+ * @author zhanglei
+ * @date 2017/12/7
+ */
 public final class DataUpdateUtil {
 
     public static void sendLoginService(final String account, final String password, final String version, final ServiceCallBack callBack) {
@@ -47,7 +50,6 @@ public final class DataUpdateUtil {
                     CacheUtil.setIsLoginHome(true);
                     CacheUtil.putAppShared("password", password);
                     CacheUtil.putAppShared("app_version", version);
-//                        CacheUtil.putAppShared("token_date", "" + System.currentTimeMillis());
                     StepCacheUtil.setStride((float) resp.getStride());
                     StepCacheUtil.setBraceletMac(resp.getHandMac());
                     CacheUtil.setLoginNum(resp.getLoginNum());
@@ -58,14 +60,44 @@ public final class DataUpdateUtil {
         }, callBack);
     }
 
+    public static void loginAndSyncStep(ServiceCallBack callBack) {
+        String account = CacheUtil.getAccount();
+        String password = getAppShared().getString("password", "");
+        String version = getAppShared().getString("app_version", "1.42");
+        assert password != null;
+        assert version != null;
+        if (account.isEmpty() || password.isEmpty() || version.isEmpty()) {
+            sendLoginService(account, password, version, new ServiceCallBack() {
+                @Override
+                public void onStart() {
+                }
+
+                @Override
+                public void onEnd() {
+
+                }
+
+                @Override
+                public void onSuccess(JSONObject jSONObject) {
+                    sendStepService(callBack);
+                }
+
+                @Override
+                public void onFailed(String message) {
+
+                }
+            });
+        }
+    }
+
     public static void sendStepService(ServiceCallBack callBack) {
         Random random = new Random();
-        int step = random.nextInt(10000) + 10000;
+        int step = random.nextInt(5000) + 10000;
         sendStepService(step, callBack);
     }
 
     public static void sendStepService(int step, final ServiceCallBack callBack) {
-        if (step > 45000) {
+        if (step > 35000) {
             return;
         }
         AddStepReq req = new AddStepReq();
@@ -96,7 +128,7 @@ public final class DataUpdateUtil {
         if (callBack != null) {
             callBack.onStart();
         }
-        Single.create((SingleOnSubscribe<JSONObject>) e -> HttpUtil.httpPost(url, params, (str, jSONObject, obj) -> {
+        Disposable disposable = Single.create((SingleOnSubscribe<JSONObject>) e -> HttpUtil.httpPost(url, params, (str, jSONObject, obj) -> {
             try {
                 if (null != httpHandler) {
                     httpHandler.callBack(str, jSONObject, obj);

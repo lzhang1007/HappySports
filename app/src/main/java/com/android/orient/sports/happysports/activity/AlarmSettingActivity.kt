@@ -1,5 +1,6 @@
 package com.android.orient.sports.happysports.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,10 +8,12 @@ import com.android.orient.practice.kldf.kldf.util.CacheUtil
 import com.android.orient.sports.happysports.R
 import com.android.orient.sports.happysports.alarm.AlarmService
 import com.android.orient.sports.happysports.alarm.AlarmService.*
+import com.android.orient.sports.happysports.utils.startAlarmService
 import kotlinx.android.synthetic.main.activity_alarm_setting.*
 
 class AlarmSettingActivity : AppCompatActivity() {
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm_setting)
@@ -23,13 +26,9 @@ class AlarmSettingActivity : AppCompatActivity() {
         switchBtn.isChecked = CacheUtil.getAppShared().getBoolean("TimePickerState", false)
         switchBtn.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
                 CacheUtil.putAppShared("SET_HOURS", timePicker.currentHour)
                 CacheUtil.putAppShared("SET_MINUTES", timePicker.currentMinute)
-                intent.putExtra(KEY_HOUR, timePicker.currentHour)
-                intent.putExtra(KEY_MINUTE, timePicker.currentMinute)
-                intent.putExtra(KEY_ACTION, 0)
-                startService(intent)
+                startAlarmService(this@AlarmSettingActivity)
             } else {
                 val intent = Intent(this@AlarmSettingActivity, AlarmService::class.java)
                 intent.putExtra(KEY_ACTION, 1)
