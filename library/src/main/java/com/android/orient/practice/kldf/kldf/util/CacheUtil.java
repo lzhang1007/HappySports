@@ -134,7 +134,11 @@ public final class CacheUtil {
     }
 
     public static String getAccount() {
-        return AESUtil.decrypt(getAppShared().getString("account", "zhanglei@orientsec.com.cn"));
+        String account = AESUtil.decrypt(getAppShared().getString("account", "zhanglei@orientsec.com.cn"));
+        if (account == null) {
+            return getAppShared().getString("account", "zhanglei@orientsec.com.cn");
+        }
+        return account;
     }
 
     public static void setStartPageUrl(String startPageUrl) {

@@ -38,7 +38,3 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-
--dontwarn kotlin.reflect.jvm.internal.**
--keep class javax.annotation.** { *; }
--dontwarn javax.annotation.**
