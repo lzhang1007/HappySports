@@ -5,10 +5,6 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.util.Log;
 
-import com.android.internal.http.multipart.FilePart;
-import com.android.internal.http.multipart.MultipartEntity;
-import com.android.internal.http.multipart.Part;
-import com.android.internal.http.multipart.StringPart;
 import com.android.orient.practice.kldf.kldf.constant.Constant;
 import com.android.orient.practice.kldf.kldf.constant.HttpConstant;
 import com.encrypt.EncryptUtil;
@@ -28,19 +24,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
- * Created by zhanglei on 2017/4/17.
+ * @author zhanglei
+ * @date 2017/4/17
  */
-
+@Deprecated
 public class HttpUtil {
     private static final int TIME_OUT = 8000;
 
@@ -56,7 +50,7 @@ public class HttpUtil {
         cacheUrl.put(HttpConstant.GET_NAVIGATION, Boolean.TRUE);
     }
 
-    private static JSONObject sendPost(String url, Map<String, String> params, List<String> fileList) {
+    /*private static JSONObject sendPost(String url, Map<String, String> params, List<String> fileList) {
         try {
             MultipartEntity mEntity;
             List<Part> parts = new ArrayList<>();
@@ -128,7 +122,7 @@ public class HttpUtil {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
     private static JSONObject sendPost(String url, Map<String, String> params) {
         try {
@@ -191,7 +185,7 @@ public class HttpUtil {
         }
     }
 
-    private static JSONObject parseResponse(Header[] headers, String aesKey, InputStream is) {
+    public static JSONObject parseResponse(Header[] headers, String aesKey, InputStream is) {
         try {
             String respToken = "";
             if (headers != null) {
@@ -263,31 +257,31 @@ public class HttpUtil {
         }
     }
 
-    public static void httpPost(String url, Map<String, String> params, List<String> fileList, HttpHandler obj) {
-        new AnonymousClass1(url, params, fileList, obj).execute(new Void[0]);
+/*    public static void httpPost(String url, Map<String, String> params, List<String> fileList, HttpHandler obj) {
+        new AnonymousClass1(url, params, fileList, obj).execute();
     }
 
     public static void httpPost(String url, Map<String, String> params, HttpHandler obj) {
-        new AnonymousClass2(url, params, obj).execute(new Void[0]);
-    }
+        new AnonymousClass2(url, params, obj).execute();
+    }*/
 
     public static void httpPost(String url, Object params, HttpHandler obj) {
-        new AnonymousClass3(params, url, obj).execute(new Void[0]);
+        new AnonymousClass3(params, url, obj).execute();
     }
 
-    public static void httpPost(String url, Map<String, String> params, HttpHandler obj, JSONObject acrossParam) {
-        new AnonymousClass4(params, url, acrossParam, obj).execute(new Void[0]);
+    /*public static void httpPost(String url, Map<String, String> params, HttpHandler obj, JSONObject acrossParam) {
+        new AnonymousClass4(params, url, acrossParam, obj).execute();
     }
 
     public static void httpPost(String url, Map<String, String> params, JSONObject obj, int code) {
-        new AnonymousClass5(params, url, obj, code).execute(new Void[0]);
+        new AnonymousClass5(params, url, obj, code).execute();
     }
 
     static class AnonymousClass1 extends AsyncTask<Void, Void, JSONObject> {
-        private final /* synthetic */ List<String> val$fileList;
-        private final /* synthetic */ HttpHandler val$obj;
-        private final /* synthetic */ Map<String, String> val$params;
-        private final /* synthetic */ String val$url;
+        private final *//* synthetic *//* List<String> val$fileList;
+        private final *//* synthetic *//* HttpHandler val$obj;
+        private final *//* synthetic *//* Map<String, String> val$params;
+        private final *//* synthetic *//* String val$url;
 
         AnonymousClass1(String str, Map map, List list, HttpHandler httpHandler) {
             this.val$url = str;
@@ -296,10 +290,12 @@ public class HttpUtil {
             this.val$obj = httpHandler;
         }
 
+        @Override
         protected JSONObject doInBackground(Void... arg0) {
             return HttpUtil.sendPost(this.val$url, this.val$params, this.val$fileList);
         }
 
+        @Override
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             try {
@@ -311,9 +307,9 @@ public class HttpUtil {
     }
 
     static class AnonymousClass2 extends AsyncTask<Void, Void, JSONObject> {
-        private final /* synthetic */ HttpHandler val$obj;
-        private final /* synthetic */ Map val$params;
-        private final /* synthetic */ String val$url;
+        private final *//* synthetic *//* HttpHandler val$obj;
+        private final *//* synthetic *//* Map val$params;
+        private final *//* synthetic *//* String val$url;
 
         AnonymousClass2(String str, Map<String, String> map, HttpHandler httpHandler) {
             this.val$url = str;
@@ -321,10 +317,12 @@ public class HttpUtil {
             this.val$obj = httpHandler;
         }
 
+        @Override
         protected JSONObject doInBackground(Void... arg0) {
             return HttpUtil.sendPost(this.val$url, this.val$params);
         }
 
+        @Override
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             try {
@@ -333,47 +331,49 @@ public class HttpUtil {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     static class AnonymousClass3 extends AsyncTask<Void, Void, JSONObject> {
-        private final /* synthetic */ HttpHandler val$obj;
-        private final /* synthetic */ Object val$params;
-        private final /* synthetic */ String val$url;
+        private final /* synthetic */ HttpHandler handler;
+        private final /* synthetic */ Object object;
+        private final /* synthetic */ String url;
 
         AnonymousClass3(Object obj, String str, HttpHandler httpHandler) {
-            this.val$params = obj;
-            this.val$url = str;
-            this.val$obj = httpHandler;
+            this.object = obj;
+            this.url = str;
+            this.handler = httpHandler;
         }
 
+        @Override
         protected JSONObject doInBackground(Void... arg0) {
             Map<String, String> map = null;
             try {
-                if (this.val$params != null) {
-                    map = MyUtil.object2Map(this.val$params);
+                if (this.object != null) {
+                    map = MyUtil.object2Map(this.object);
                 }
-                return HttpUtil.sendPost(this.val$url, map);
+                return /*post(url, new Gson().toJson(map))*/sendPost(this.url, map);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         }
 
+        @Override
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             try {
-                this.val$obj.callBack(this.val$url, result, this.val$obj);
+                this.handler.callBack(result);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    static class AnonymousClass4 extends AsyncTask<Void, Void, JSONObject> {
-        private final /* synthetic */ Object val$acrossParam;
-        private final /* synthetic */ HttpHandler val$obj;
-        private final /* synthetic */ Map<String, String> val$params;
-        private final /* synthetic */ String val$url;
+    /*static class AnonymousClass4 extends AsyncTask<Void, Void, JSONObject> {
+        private final *//* synthetic *//* Object val$acrossParam;
+        private final *//* synthetic *//* HttpHandler val$obj;
+        private final *//* synthetic *//* Map<String, String> val$params;
+        private final *//* synthetic *//* String val$url;
 
         AnonymousClass4(Map<String, String> obj, String str, Object obj2, HttpHandler httpHandler) {
             this.val$params = obj;
@@ -382,6 +382,7 @@ public class HttpUtil {
             this.val$obj = httpHandler;
         }
 
+        @Override
         protected JSONObject doInBackground(Void... arg0) {
             Map<String, String> map = null;
             try {
@@ -395,6 +396,7 @@ public class HttpUtil {
             }
         }
 
+        @Override
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             try {
@@ -407,10 +409,10 @@ public class HttpUtil {
     }
 
     static class AnonymousClass5 extends AsyncTask<Void, Void, JSONObject> {
-        private final /* synthetic */ int val$code;
-        private final /* synthetic */ JSONObject val$obj;
-        private final /* synthetic */ Map<String, String> val$params;
-        private final /* synthetic */ String val$url;
+        private final *//* synthetic *//* int val$code;
+        private final *//* synthetic *//* JSONObject val$obj;
+        private final *//* synthetic *//* Map<String, String> val$params;
+        private final *//* synthetic *//* String val$url;
 
         AnonymousClass5(Map<String, String> obj, String str, JSONObject obj2, int i) {
             this.val$params = obj;
@@ -419,6 +421,7 @@ public class HttpUtil {
             this.val$code = i;
         }
 
+        @Override
         protected JSONObject doInBackground(Void... arg0) {
             Map<String, String> map = null;
             try {
@@ -432,14 +435,16 @@ public class HttpUtil {
             }
         }
 
+        @Override
         protected void onPostExecute(JSONObject result) {
             super.onPostExecute(result);
             try {
-                String methodName = new StringBuilder(String.valueOf(this.val$url.substring(this.val$url.lastIndexOf("/") + 1, this.val$url.lastIndexOf(".")))).append("Back").toString();
-                MyUtil.invokeMethod(this.val$obj, methodName, new Object[]{result, Integer.valueOf(this.val$code)});
+                String methodName = String.valueOf(this.val$url.substring(this.val$url.lastIndexOf("/") + 1, this.val$url.lastIndexOf("."))) + "Back";
+                MyUtil.invokeMethod(this.val$obj, methodName, new Object[]{result, this.val$code});
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
+
 }

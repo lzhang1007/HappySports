@@ -8,7 +8,7 @@ import com.android.orient.practice.kldf.kldf.entity.resp.LoginResp;
 import com.android.orient.practice.kldf.kldf.util.CacheUtil;
 import com.android.orient.practice.kldf.kldf.util.DateUtil;
 import com.android.orient.practice.kldf.kldf.util.HttpHandler;
-import com.android.orient.practice.kldf.kldf.util.HttpUtil;
+import com.android.orient.practice.kldf.kldf.util.HttpUtilsKt;
 import com.android.orient.practice.kldf.kldf.util.MyUtil;
 import com.android.orient.practice.kldf.kldf.util.StepCacheUtil;
 import com.encrypt.EncryptUtil;
@@ -39,7 +39,7 @@ public final class DataUpdateUtil {
         req.setChannelId(CacheUtil.getChannelId());
         req.setSign(EncryptUtil.md5(req.getLoginName() + req.getChannelId()));
 
-        httpPost(HttpConstant.USER_LOGIN, req, (str, jSONObject, obj) -> {
+        httpPost(HttpConstant.USER_LOGIN, req, (jSONObject) -> {
             try {
                 if (HttpConstant.SUCCESS.equals(jSONObject.getString("result"))) {
                     LoginResp resp = new LoginResp();
@@ -64,8 +64,6 @@ public final class DataUpdateUtil {
         String account = CacheUtil.getAccount();
         String password = getAppShared().getString("password", "");
         String version = getAppShared().getString("app_version", "1.42");
-        assert password != null;
-        assert version != null;
         if (account.isEmpty() || password.isEmpty() || version.isEmpty()) {
             sendLoginService(account, password, version, new ServiceCallBack() {
                 @Override
@@ -90,7 +88,7 @@ public final class DataUpdateUtil {
         }
     }
 
-    public static void sendStepService(ServiceCallBack callBack) {
+    private static void sendStepService(ServiceCallBack callBack) {
         Random random = new Random();
         int step = random.nextInt(5000) + 10000;
         sendStepService(step, callBack);
@@ -104,7 +102,7 @@ public final class DataUpdateUtil {
         req.setTimestamp(String.valueOf(System.currentTimeMillis()));
         req.setSteps(getStepsInfo(step));
         req.setSign(EncryptUtil.md5(CacheUtil.getToken() + req.getTimestamp()));
-        httpPost(HttpConstant.ADD_STEP, req, (str, jSONObject, obj) -> {
+        httpPost(HttpConstant.ADD_STEP, req, (jSONObject) -> {
             try {
                 if (HttpConstant.SUCCESS.equals(jSONObject.getString("result"))) {
                     CacheUtil.putAppShared("token_date", "" + System.currentTimeMillis());
@@ -128,10 +126,11 @@ public final class DataUpdateUtil {
         if (callBack != null) {
             callBack.onStart();
         }
-        Disposable disposable = Single.create((SingleOnSubscribe<JSONObject>) e -> HttpUtil.httpPost(url, params, (str, jSONObject, obj) -> {
+        Disposable disposable = Single.create((SingleOnSubscribe<JSONObject>) e -> {
+            JSONObject jSONObject = HttpUtilsKt.post(url, params);
             try {
                 if (null != httpHandler) {
-                    httpHandler.callBack(str, jSONObject, obj);
+                    httpHandler.callBack(jSONObject);
                 }
                 String resultCode = jSONObject.getString("result");
                 if (HttpConstant.SUCCESS.equals(resultCode)) {
@@ -144,8 +143,8 @@ public final class DataUpdateUtil {
                 e.onError(e1);
                 e1.printStackTrace();
             }
-        }))
-                .subscribeOn(Schedulers.single())
+        })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(jsonObject -> {
                     if (callBack != null) {

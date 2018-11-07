@@ -2,6 +2,9 @@ package com.android.orient.practice.kldf.kldf.util;
 
 import org.json.JSONObject;
 
+/**
+ * @author zhanglei
+ */
 public interface HttpHandler {
-    void callBack(String str, JSONObject jSONObject, Object obj);
+    void callBack(JSONObject jSONObject);
 }
