@@ -13,20 +13,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.android.orient.practice.kldf.base.SimpleServiceCallBack;
-import com.android.orient.practice.kldf.kldf.util.CacheUtil;
 import com.android.orient.sports.happysports.R;
 import com.android.orient.sports.happysports.activity.ResultActivity;
-import com.android.orient.sports.happysports.utils.DataUpdateUtil;
 
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.core.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -76,7 +74,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void sendService(final Context context) {
-        DataUpdateUtil.loginAndSyncStep(new SimpleServiceCallBack() {
+       /* DataUpdateUtil.loginAndSyncStep(new SimpleServiceCallBack() {
 
             @Override
             public void onSuccess(JSONObject jSONObject) {
@@ -91,7 +89,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 swapNotification(context, false);
                 CacheUtil.putAppShared("receiver_update", "同步失败：" + "\n" + message);
             }
-        });
+        });*/
     }
 
     private void swapNotification(Context context, boolean isSuccess) {

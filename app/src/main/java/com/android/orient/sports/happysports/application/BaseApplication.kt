@@ -1,8 +1,7 @@
 package com.android.orient.sports.happysports.application
 
 import android.app.Application
-import com.android.orient.practice.kldf.kldf.util.CacheUtil
-import com.android.orient.practice.kldf.kldf.util.DeviceInfoUtil.instance
+import com.android.orient.sports.happysports.utils.ContextDelegate
 import com.android.orient.sports.happysports.utils.startAlarmService
 
 /**
@@ -11,10 +10,10 @@ import com.android.orient.sports.happysports.utils.startAlarmService
  * Author: zhanglei
  */
 class BaseApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        CacheUtil.initCache(this)
+        ContextDelegate.context = this
         startAlarmService(this)
     }
 

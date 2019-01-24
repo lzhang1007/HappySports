@@ -6,15 +6,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
-import com.android.orient.practice.kldf.base.ServiceCallBack
-import com.android.orient.practice.kldf.kldf.util.CacheUtil
+import androidx.appcompat.app.AppCompatActivity
 import com.android.orient.sports.happysports.activity.AlarmSettingActivity
 import com.android.orient.sports.happysports.activity.LoginActivity
-import com.android.orient.sports.happysports.utils.DataUpdateUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(my_steps.text)) {
                 return@setOnClickListener
             }
-            DataUpdateUtil.sendStepService(my_steps.text.toString().toInt(), object : ServiceCallBack {
+          /*  DataUpdateUtil.sendStepService(my_steps.text.toString().toInt(), object : ServiceCallBack {
                 override fun onStart() {
                     showProgress(true)
                 }
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailed(message: String) {
                     logMessage("同步数据失败\n$message")
                 }
-            })
+            })*/
         }
         setupViewData()
     }
@@ -72,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupViewData() {
-        val token = CacheUtil.getToken()
+       /* val token = CacheUtil.getToken()
         if (TextUtils.isEmpty(token))
             my_message.text = "未登录, 请先登录"
         else {
@@ -84,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"))
         }
 
-        my_info.text = CacheUtil.getAppShared().getString("token_Update_time", "")
+        my_info.text = CacheUtil.getAppShared().getString("token_Update_time", "")*/
     }
 
     /**

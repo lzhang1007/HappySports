@@ -1,14 +1,9 @@
 package com.android.orient.sports.happysports.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.android.orient.practice.kldf.kldf.util.CacheUtil
+import androidx.appcompat.app.AppCompatActivity
 import com.android.orient.sports.happysports.R
-import com.android.orient.sports.happysports.alarm.AlarmService
-import com.android.orient.sports.happysports.alarm.AlarmService.*
-import com.android.orient.sports.happysports.utils.startAlarmService
 import kotlinx.android.synthetic.main.activity_alarm_setting.*
 
 class AlarmSettingActivity : AppCompatActivity() {
@@ -17,7 +12,7 @@ class AlarmSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm_setting)
-        timePicker.setIs24HourView(true)
+      /*  timePicker.setIs24HourView(true)
         timePicker.currentHour = CacheUtil.getAppShared().getInt("SET_HOURS", 0)
         timePicker.currentMinute = CacheUtil.getAppShared().getInt("SET_MINUTES", 0)
         timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
@@ -35,7 +30,7 @@ class AlarmSettingActivity : AppCompatActivity() {
                 startService(intent)
             }
             CacheUtil.putAppShared("TimePickerState", isChecked)
-        }
+        }*/
         selectTime.text = "您选择的同步时间为每天的${timePicker.currentHour}:${timePicker.currentMinute}"
     }
 }
