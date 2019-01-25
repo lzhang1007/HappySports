@@ -2,8 +2,11 @@ package com.android.orient.sports.happysports;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static com.android.orient.sports.happysports.encrypt.EncryptUtlsKt.encodeSMS4;
 import static com.android.orient.sports.happysports.encrypt.EncryptUtlsKt.encodeSMS4toString;
+import static kotlin.random.RandomKt.Random;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -24,6 +27,13 @@ public class ExampleUnitTest {
             sb.append(b);
         }
         System.out.println("\n加密后：" + sb.toString() + "\n");
+    }
+
+    @Test
+    public void test2() {
+        Random random = new Random();
+        int step = random.nextInt(10000) + 10000;
+        System.out.println(step);
     }
 
 }

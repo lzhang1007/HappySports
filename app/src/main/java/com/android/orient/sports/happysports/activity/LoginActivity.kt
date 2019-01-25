@@ -3,14 +3,20 @@ package com.android.orient.sports.happysports.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
+import android.text.format.DateFormat
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.orient.sports.happysports.R
+import com.android.orient.sports.happysports.entity.LoginResponse
 import com.android.orient.sports.happysports.http.login
+import com.android.orient.sports.happysports.utils.appVersion
+import com.android.orient.sports.happysports.utils.loginDate
+import com.android.orient.sports.happysports.utils.password
+import com.android.orient.sports.happysports.utils.userName
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -26,44 +32,34 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "账号、密码、版本号不能为空", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            login(email, password, success = { response ->
-                Log.d("zhanglei", "response = $response")
-            })
-            /*DataUpdateUtil.sendLoginService(email, password, version, object : ServiceCallBack {
-
-                override fun onStart() {
-                    showProgress(true)
-                }
-
-                override fun onEnd() {
-                    showProgress(false)
-                }
-
-                @SuppressLint("SetTextI18n")
-                override fun onSuccess(jSONObject: JSONObject) {
-                    Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_LONG).show()
-                    setResult(Activity.RESULT_OK)
-                    this@LoginActivity.finish()
-                }
-
-                override fun onFailed(message: String) {
-                    my_message.text = ("登录失败\n$message")
-                }
-            })*/
+            showProgress(true)
+            login(email, password, LoginResponse::class.java,
+                    success = {
+                        userName = email
+                        com.android.orient.sports.happysports.utils.password = password
+                        com.android.orient.sports.happysports.utils.appVersion = appVersion
+                        loginDate = System.currentTimeMillis().toString()
+                        showProgress(false)
+                        Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_LONG).show()
+                        setResult(Activity.RESULT_OK)
+                        this@LoginActivity.finish()
+                    },
+                    failure = {
+                        my_message.text = ("登录失败\n$it")
+                        showProgress(false)
+                    })
         }
         setupViewData()
     }
 
     @SuppressLint("SetTextI18n")
     private fun setupViewData() {
-        /* val account = CacheUtil.getAccount()
-         my_version.setText(getAppShared().getString("app_version", "1.42"))
-         my_email.setText(account)
-         my_password.setText(getAppShared().getString("password", ""))
-         val lastTime = CacheUtil.getAppShared().getString("token_date", "0")
-         my_message.text = ("当前登录的账号为：" + "\n" + account
-                 + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", lastTime.toLong())
-                 + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"))*/
+        my_version.setText(appVersion)
+        my_email.setText(userName)
+        my_password.setText(password)
+        my_message.text = ("当前登录的账号为：" + "\n" + userName
+                + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", loginDate.toLong())
+                + "\n" + "当前版本号为：" + appVersion)
     }
 
     /**

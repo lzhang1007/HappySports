@@ -12,8 +12,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.orient.sports.happysports.activity.AlarmSettingActivity
 import com.android.orient.sports.happysports.activity.LoginActivity
+import com.android.orient.sports.happysports.entity.StepResponse
+import com.android.orient.sports.happysports.http.syncStep
+import com.android.orient.sports.happysports.utils.accessToken
+import com.android.orient.sports.happysports.utils.authToken
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -31,24 +34,15 @@ class MainActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(my_steps.text)) {
                 return@setOnClickListener
             }
-          /*  DataUpdateUtil.sendStepService(my_steps.text.toString().toInt(), object : ServiceCallBack {
-                override fun onStart() {
-                    showProgress(true)
-                }
-
-                override fun onEnd() {
-                    showProgress(false)
-                }
-
-                override fun onSuccess(jSONObject: JSONObject) {
-                    setupViewData()
-                    logMessage("同步数据成功\n$jSONObject")
-                }
-
-                override fun onFailed(message: String) {
-                    logMessage("同步数据失败\n$message")
-                }
-            })*/
+            showProgress(true)
+            syncStep(my_steps.text.toString().toInt(), StepResponse::class.java, success = {
+                setupViewData()
+                logMessage("同步数据成功")
+                showProgress(false)
+            }, failure = {
+                logMessage("同步数据失败\n$it")
+                showProgress(false)
+            })
         }
         setupViewData()
     }
@@ -69,19 +63,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setupViewData() {
-       /* val token = CacheUtil.getToken()
-        if (TextUtils.isEmpty(token))
-            my_message.text = "未登录, 请先登录"
-        else {
-            val lastSteps = CacheUtil.getAppShared().getInt("last_steps", 0)
-            val account = CacheUtil.getAccount()
-            val lastTime = CacheUtil.getAppShared().getString("token_date", "" + System.currentTimeMillis())
-            my_message.text = ("当前登录的账号为：" + "\n" + account
-                    + "\n" + "最后同步日期为：" + "\n" + DateFormat.format("yyyy-MM-dd HH:mm:ss", java.lang.Long.parseLong(lastTime)) + ", 步数为:$lastSteps"
-                    + "\n" + "当前版本号为：" + CacheUtil.getAppShared().getString("app_version", "--"))
-        }
-
-        my_info.text = CacheUtil.getAppShared().getString("token_Update_time", "")*/
+        my_info.text = "access_token = $accessToken " +
+                "\n authToken = $authToken"
     }
 
     /**

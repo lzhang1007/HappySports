@@ -2,6 +2,7 @@ package com.android.orient.sports.happysports.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.google.gson.Gson
 
 /**
  * @PackageName com.android.orient.sports.happysports.utils
@@ -12,7 +13,7 @@ val appContext: Context by lazy { ContextDelegate.context }
 
 const val MIEI = "#com.dfzq.kldf#867982021702619"
 
-const val appVersion = "3.1.0"
+val gson = Gson()
 
 @SuppressLint("StaticFieldLeak")
 object ContextDelegate {

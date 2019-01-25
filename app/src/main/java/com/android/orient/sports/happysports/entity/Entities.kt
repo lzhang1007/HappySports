@@ -6,6 +6,7 @@ import com.android.orient.sports.happysports.http.URL_LOGIN
 import com.android.orient.sports.happysports.http.URL_SYC_STEP
 import com.android.orient.sports.happysports.utils.MIEI
 import com.android.orient.sports.happysports.utils.appVersion
+import com.google.gson.JsonObject
 import okhttp3.FormBody
 import okhttp3.Request
 import java.text.SimpleDateFormat
@@ -60,7 +61,7 @@ class LoginRequest(private val userName: String, private val password: String) :
 /**
  * 同步步数
  */
-class StepRequest(private val step: String, private val vhsToken: String) : NetWorkRequest() {
+class StepRequest(private val step: Int, private val vhsToken: String) : NetWorkRequest() {
     @SuppressLint("SimpleDateFormat")
     override fun setupBuilder(): Request.Builder {
         val builder = FormBody.Builder()
@@ -78,4 +79,10 @@ class StepRequest(private val step: String, private val vhsToken: String) : NetW
                 .tag("DfzqAddStepRequest")
     }
 }
+
+open class BaseResponse(var result: String = "", var info: String = "", var code: String = "", var message: String = "", var data: JsonObject = JsonObject())
+
+data class LoginResponse(var cellphone: String = "", var name: String = "", var deptId: String = "") : BaseResponse()
+
+data class StepResponse(var name: String = "") : BaseResponse()
 
