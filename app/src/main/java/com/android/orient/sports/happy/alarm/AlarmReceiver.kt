@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.alarm
+package com.android.orient.sports.happy.alarm
 
 import android.annotation.SuppressLint
 import android.app.*
@@ -12,9 +12,9 @@ import android.os.Build
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.android.orient.sports.happysports.R
-import com.android.orient.sports.happysports.activity.ResultActivity
-import com.android.orient.sports.happysports.http.loginAndSyncStep
+import com.android.orient.sports.happy.R
+import com.android.orient.sports.happy.activity.ResultActivity
+import com.android.orient.sports.happy.http.loginAndSyncStep
 import java.text.SimpleDateFormat
 import java.util.*
 

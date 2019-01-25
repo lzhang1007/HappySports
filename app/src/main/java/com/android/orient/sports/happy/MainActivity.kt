@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports
+package com.android.orient.sports.happy
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -10,12 +10,12 @@ import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.android.orient.sports.happysports.activity.AlarmSettingActivity
-import com.android.orient.sports.happysports.activity.LoginActivity
-import com.android.orient.sports.happysports.entity.StepResponse
-import com.android.orient.sports.happysports.http.syncStep
-import com.android.orient.sports.happysports.utils.accessToken
-import com.android.orient.sports.happysports.utils.authToken
+import com.android.orient.sports.happy.activity.AlarmSettingActivity
+import com.android.orient.sports.happy.activity.LoginActivity
+import com.android.orient.sports.happy.entity.StepResponse
+import com.android.orient.sports.happy.http.syncStep
+import com.android.orient.sports.happy.utils.accessToken
+import com.android.orient.sports.happy.utils.authToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

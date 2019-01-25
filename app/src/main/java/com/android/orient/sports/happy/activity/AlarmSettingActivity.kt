@@ -1,16 +1,16 @@
-package com.android.orient.sports.happysports.activity
+package com.android.orient.sports.happy.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.android.orient.sports.happysports.R
-import com.android.orient.sports.happysports.alarm.AlarmService
-import com.android.orient.sports.happysports.alarm.AlarmService.KEY_ACTION
-import com.android.orient.sports.happysports.utils.alarmHour
-import com.android.orient.sports.happysports.utils.alarmMinute
-import com.android.orient.sports.happysports.utils.alarmOn
-import com.android.orient.sports.happysports.utils.startAlarmService
+import com.android.orient.sports.happy.R
+import com.android.orient.sports.happy.alarm.AlarmService
+import com.android.orient.sports.happy.alarm.AlarmService.KEY_ACTION
+import com.android.orient.sports.happy.utils.alarmHour
+import com.android.orient.sports.happy.utils.alarmMinute
+import com.android.orient.sports.happy.utils.alarmOn
+import com.android.orient.sports.happy.utils.startAlarmService
 import kotlinx.android.synthetic.main.activity_alarm_setting.*
 
 class AlarmSettingActivity : AppCompatActivity() {

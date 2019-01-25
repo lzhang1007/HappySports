@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.android.orient.sports.happysports.MainActivity">
+    tools:context="com.android.orient.sports.happy.MainActivity">
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"

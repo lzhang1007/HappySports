@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.http
+package com.android.orient.sports.happy.http
 
 /**
  * @PackageName com.android.orient.sports.happysports.http

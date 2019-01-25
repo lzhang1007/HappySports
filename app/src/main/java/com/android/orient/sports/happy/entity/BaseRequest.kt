@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.entity
+package com.android.orient.sports.happy.entity
 
 import android.text.TextUtils
 import org.json.JSONException

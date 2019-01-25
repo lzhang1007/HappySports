@@ -1,11 +1,11 @@
-package com.android.orient.sports.happysports;
+package com.android.orient.sports.happy;
 
 import org.junit.Test;
 
 import java.util.Random;
 
-import static com.android.orient.sports.happysports.encrypt.EncryptUtlsKt.encodeSMS4;
-import static com.android.orient.sports.happysports.encrypt.EncryptUtlsKt.encodeSMS4toString;
+import static com.android.orient.sports.happy.encrypt.EncryptUtlsKt.encodeSMS4;
+import static com.android.orient.sports.happy.encrypt.EncryptUtlsKt.encodeSMS4toString;
 import static kotlin.random.RandomKt.Random;
 
 /**

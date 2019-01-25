@@ -1,10 +1,10 @@
-package com.android.orient.sports.happysports.activity
+package com.android.orient.sports.happy.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.android.orient.sports.happysports.R
-import com.android.orient.sports.happysports.utils.appVersion
-import com.android.orient.sports.happysports.utils.userName
+import com.android.orient.sports.happy.R
+import com.android.orient.sports.happy.utils.appVersion
+import com.android.orient.sports.happy.utils.userName
 import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {

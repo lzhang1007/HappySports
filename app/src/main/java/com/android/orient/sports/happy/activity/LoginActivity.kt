@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.activity
+package com.android.orient.sports.happy.activity
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -10,13 +10,13 @@ import android.text.format.DateFormat
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.orient.sports.happysports.R
-import com.android.orient.sports.happysports.entity.LoginResponse
-import com.android.orient.sports.happysports.http.login
-import com.android.orient.sports.happysports.utils.appVersion
-import com.android.orient.sports.happysports.utils.loginDate
-import com.android.orient.sports.happysports.utils.password
-import com.android.orient.sports.happysports.utils.userName
+import com.android.orient.sports.happy.R
+import com.android.orient.sports.happy.entity.LoginResponse
+import com.android.orient.sports.happy.http.login
+import com.android.orient.sports.happy.utils.appVersion
+import com.android.orient.sports.happy.utils.loginDate
+import com.android.orient.sports.happy.utils.password
+import com.android.orient.sports.happy.utils.userName
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -36,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
             login(email, password, LoginResponse::class.java,
                     success = {
                         userName = email
-                        com.android.orient.sports.happysports.utils.password = password
-                        com.android.orient.sports.happysports.utils.appVersion = appVersion
+                        com.android.orient.sports.happy.utils.password = password
+                        com.android.orient.sports.happy.utils.appVersion = appVersion
                         loginDate = System.currentTimeMillis().toString()
                         showProgress(false)
                         Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_LONG).show()

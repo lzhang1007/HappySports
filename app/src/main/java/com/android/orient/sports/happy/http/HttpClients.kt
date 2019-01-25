@@ -1,7 +1,7 @@
-package com.android.orient.sports.happysports.http
+package com.android.orient.sports.happy.http
 
 import android.annotation.SuppressLint
-import com.android.orient.sports.happysports.utils.appContext
+import com.android.orient.sports.happy.utils.appContext
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl

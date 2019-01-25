@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.utils
+package com.android.orient.sports.happy.utils
 
 import android.content.Context
 

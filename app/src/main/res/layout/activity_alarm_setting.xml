@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.android.orient.sports.happysports.activity.AlarmSettingActivity">
+    tools:context="com.android.orient.sports.happy.activity.AlarmSettingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

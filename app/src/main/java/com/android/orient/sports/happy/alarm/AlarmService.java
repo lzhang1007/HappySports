@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports.alarm;
+package com.android.orient.sports.happy.alarm;
 
 import android.app.Service;
 import android.content.Intent;

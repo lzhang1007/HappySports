@@ -1,8 +1,8 @@
-package com.android.orient.sports.happysports.application
+package com.android.orient.sports.happy.application
 
 import android.app.Application
-import com.android.orient.sports.happysports.utils.ContextDelegate
-import com.android.orient.sports.happysports.utils.startAlarmService
+import com.android.orient.sports.happy.utils.ContextDelegate
+import com.android.orient.sports.happy.utils.startAlarmService
 
 /**
  * Package Name: com.android.orient.sports.happysports.application

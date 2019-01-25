@@ -1,11 +1,11 @@
-package com.android.orient.sports.happysports.entity
+package com.android.orient.sports.happy.entity
 
 import android.annotation.SuppressLint
-import com.android.orient.sports.happysports.encrypt.encodeSMS4toString
-import com.android.orient.sports.happysports.http.URL_LOGIN
-import com.android.orient.sports.happysports.http.URL_SYC_STEP
-import com.android.orient.sports.happysports.utils.MIEI
-import com.android.orient.sports.happysports.utils.appVersion
+import com.android.orient.sports.happy.encrypt.encodeSMS4toString
+import com.android.orient.sports.happy.http.URL_LOGIN
+import com.android.orient.sports.happy.http.URL_SYC_STEP
+import com.android.orient.sports.happy.utils.MIEI
+import com.android.orient.sports.happy.utils.appVersion
 import com.google.gson.JsonObject
 import okhttp3.FormBody
 import okhttp3.Request

@@ -1,4 +1,4 @@
-package com.android.orient.sports.happysports;
+package com.android.orient.sports.happy;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
